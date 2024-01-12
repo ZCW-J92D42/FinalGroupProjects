@@ -13,7 +13,6 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/document")
-@CrossOrigin (origins = "http://localhost:3000")
 public class DocumentController {
     private DocumentService documentService;
 
@@ -48,8 +47,9 @@ public class DocumentController {
      * @param document Document with values to update
      * @return Document with updated values
      */
-    @PatchMapping("/update")
-    public DocumentDTO saveDocument(@RequestBody Document document){
+    @PutMapping("/update")
+    public DocumentDTO saveDocument(@RequestBody DocumentDTO document){
+        System.out.println("beep boop");
         return this.documentService.updateDocument(document);
     }
 
