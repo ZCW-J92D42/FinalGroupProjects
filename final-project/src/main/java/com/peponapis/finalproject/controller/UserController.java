@@ -1,6 +1,7 @@
 package com.peponapis.finalproject.controller;
 import com.peponapis.finalproject.dtos.UserDTO;
 import com.peponapis.finalproject.model.UserEntity;
+import com.peponapis.finalproject.security.JWTGenerator;
 import com.peponapis.finalproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -23,12 +24,15 @@ import javax.naming.AuthenticationException;
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
-    @Autowired
     private final UserService userService;
     AuthenticationManager authenticationManager;
-    public UserController(UserService userService, AuthenticationManager authenticationManager){
+    private JWTGenerator jwtGenerator;
+
+    @Autowired
+    public UserController(UserService userService, AuthenticationManager authenticationManager, JWTGenerator jwtGenerator){
         this.userService = userService;
         this.authenticationManager = authenticationManager;
+        this.jwtGenerator = jwtGenerator;
     }
 
     /**
@@ -55,17 +59,24 @@ public class UserController {
      * @throws AuthenticationException if user is not authenticated with username or password
      */
     @PostMapping("/login")
-    public ResponseEntity<?> authorizeLogin(@RequestBody UserEntity userEntity) throws AuthenticationException {
+    public ResponseEntity<UserDTO> authorizeLogin(@RequestBody UserEntity userEntity) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(userEntity.getUserName(), userEntity.getPassword()));
+
         try {
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(userEntity.getUserName(), userEntity.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
+            String token = jwtGenerator.generateToken(authentication);
+            UserDTO authenticatedUserEntity = userService.authenicatorUser(userEntity.getUserName(), userEntity.getPassword(), token);
+            return new ResponseEntity<>(authenticatedUserEntity, HttpStatus.OK);
+
         }
         catch(BadCredentialsException e){
             System.out.println("Bad Credentials!");
         }
-        UserDTO authenticatedUserEntity = userService.authenicatorUser(userEntity.getUserName(), userEntity.getPassword());
-            return new ResponseEntity<>(authenticatedUserEntity, HttpStatus.OK);
+        catch ( AuthenticationException e){
+            System.out.println("Bad credentials!");
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
 
