@@ -5,6 +5,9 @@ import com.peponapis.finalproject.model.Document;
 
 import java.util.Date;
 
+/**
+ * Data Transfer Object for Document. Used for passing only the relevant document info.
+ */
 public class DocumentDTO {
     private int id;
     private String title;
@@ -14,6 +17,7 @@ public class DocumentDTO {
     private int author_id;
     private String author;
 
+    // TODO: if there's no uses for this later, take it out
     public DocumentDTO(int id, String title, String body, Date creationDate, Date modificationDate, int author_id, String author) {
         this.id = id;
         this.title = title;
@@ -24,6 +28,8 @@ public class DocumentDTO {
         this.author = author;
     }
 
+
+    // constructor to make dto out of Document
     public DocumentDTO(Document document){
         this.id = document.getId();
         this.title = document.getTitle();
