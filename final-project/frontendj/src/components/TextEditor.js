@@ -10,7 +10,9 @@ const TextEditor = (id) => {
     const [document, setDocument] = useState('');
     let userId = localStorage.getItem('userId');
     const [canEdit, setCanEdit] = useState(false);
-    let title; 
+    const [title, setTitle] = useState(''); 
+    const [docId, setDocId] = useState('');
+    const [authorId, setAuthorId] = useState('');
 
     // fetching document from backend
     useEffect(() => {
@@ -23,7 +25,9 @@ const TextEditor = (id) => {
             setContent(data.body);
             setDocument(data);
             setCanEdit(userId == data.authorId);
-            title = document.title;
+            setTitle(data.title);
+            setDocId(data.id);
+            setAuthorId(data.authorId);
 
         });
     }, []); // REMEMBER THIS ENDING PART, OR ELSE IT'LL FETCH FOREVER
@@ -36,7 +40,7 @@ const TextEditor = (id) => {
 
     // resources: maybe will need this later when saving updates
     // https://jasonwatmore.com/post/2020/02/01/react-fetch-http-post-request-examples
-    const handleSave = (delta) => {
+    const handleSave = () => {
         // Your save logic here
         console.log(content)
         const token = `Bearer ` + Cookies.get('token');
@@ -46,7 +50,7 @@ const TextEditor = (id) => {
                 "Content-Type": "application/json",
                 Authorization: token,
             },
-            body: JSON.stringify({ id: document.id, title: document.title, body: content, authorId: document.authorId })
+            body: JSON.stringify({ id: docId, title: title, body: content, authorId: authorId })
         }
         console.log(requestJSON);
         console.log(document);
@@ -96,7 +100,7 @@ const TextEditor = (id) => {
             transform: 'translate(-50%, -15%)'
         }}>
             <h1>Text Editor</h1>
-            <h2>{document.title}</h2>
+            <h2>{title}</h2>
             <button id="save-btn" onClick={handleSave}>Save</button>
             <ReactQuill
              readOnly = {!canEdit}
