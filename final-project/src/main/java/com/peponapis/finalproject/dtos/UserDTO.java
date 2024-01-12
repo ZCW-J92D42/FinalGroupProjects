@@ -11,7 +11,6 @@ public class UserDTO {
     public UserDTO(UserEntity user, String token){
         this.id = user.getUserId();
         this.name = user.getName();
-        System.out.println(token);
         this.accessToken = token;
     }
 
