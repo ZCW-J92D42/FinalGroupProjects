@@ -1,6 +1,7 @@
 // Login.js (LoginMenu component)
 
 import React, { useState } from 'react';
+import Cookies from 'js-cookie';
 
 const Login = ({ onLogin }) => {
     const [userName, setUserName] = useState('');
@@ -28,9 +29,13 @@ const Login = ({ onLogin }) => {
                 localStorage.setItem('userName', JSON.stringify(userData.userName));
                 localStorage.setItem('userInfo', JSON.stringify(userData));
 
+                // Saving token into cookie
+                // there is an expires field for cookie. if omitted, it's a session cookie. if not, the number is how many days it lasts
+                // setting secure to false bc we're on localhost
+                Cookies.set('token', userData.accessToken, {expires: 1, secure:false});
+
                 // Notify the parent component about the login
                 onLogin();
-
 
 
                 console.log(localStorage.getItem('userInfo'));

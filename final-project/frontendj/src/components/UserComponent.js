@@ -3,6 +3,7 @@ import Login from './Login'; // Create a Login component
 import user from '../user.png'; // Import your login icon
 import './UserComponent.css'; // Import a CSS file for stylin
 
+
 const UserComponent = () => {
     const isLoggedIn = () => {
         const userId = localStorage.getItem('userInfo');
