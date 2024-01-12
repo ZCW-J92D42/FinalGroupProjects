@@ -11,6 +11,9 @@ import java.util.Date;
 
 /**
  * Component that handles JWT token.
+ *
+ * resources:
+ * https://www.youtube.com/watch?v=M3OHzfRmJa0&list=PL82C6-O4XrHe3sDCodw31GjXbwRdCyyuY&index=9&pp=iAQB
  */
 @Component
 public class JWTGenerator {

@@ -13,6 +13,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
 
 
 /**
@@ -46,6 +51,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated()) // to reach any other path, you must be authenticated
                 .csrf(AbstractHttpConfigurer::disable).cors(AbstractHttpConfigurer::disable)
                 .exceptionHandling((e) -> e.authenticationEntryPoint(authEntryPoint))
+                .cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource()))
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults());
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
@@ -54,6 +60,23 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+
+    // resource: https://stackoverflow.com/questions/77266685/spring-security-6-cors-is-deprecated-and-marked-for-removal
+    // have to configure cors because it wasn't allowing put request
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        //Make the below setting as * to allow connection from any hos
+        corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000")); // allow requests from localhost:3000
+        corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT")); // allow these types  of requests
+        corsConfiguration.setAllowCredentials(true);
+        corsConfiguration.setAllowedHeaders(List.of("*"));
+        corsConfiguration.setMaxAge(3600L);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", corsConfiguration);
+        return source;
     }
 
     @Bean
