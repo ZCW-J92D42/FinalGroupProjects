@@ -94,14 +94,14 @@ public class UserService {
      *                                  for username and user password
      */
 
-    public UserDTO authenicatorUser (String username, String password) throws AuthenticationException {
+    public UserDTO authenicatorUser (String username, String password, String token) throws AuthenticationException {
         UserEntity userEntity = userRepo.findByUserName(username)
                 .orElseThrow(() -> new AuthenticationException("Username doesn't exist"));
         if (!passwordEncoder.matches(password, userEntity.getPassword())){
             throw new AuthenticationException("Invalid Login");
         }
 
-        UserDTO userDTO = new UserDTO(userEntity);
+        UserDTO userDTO = new UserDTO(userEntity, token);
 
         return userDTO;
     }
