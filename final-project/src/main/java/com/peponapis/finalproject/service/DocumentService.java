@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.print.Doc;
 import java.security.Principal;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,28 +43,18 @@ public class DocumentService {
      */
     public DocumentDTO createDocument(Document document){
         Authentication authentication = authenticationFacade.getAuthentication();
-        //LinkedHashMap<String, Object> properties = (LinkedHashMap<String, Object>) authentication.getDetails();
-        User user = (User) authentication.getPrincipal();
+        User user = (User) authentication.getPrincipal(); // getting authenticated user details
 
+        // using above details (username) to find the user in our db
         UserEntity docAuthor = userRepo.findByUserName(user.getUsername()).get();
-
 
         this.documentRepo.save(document); // saving the document into the db first
         docAuthor.addDocument(document); // adding the document to user
         document.setUser(docAuthor); // adding the user to doc
         this.userRepo.save(docAuthor); // saving user with updated document list
-        this.documentRepo.save(document); // saving document again, this time with user
+        Document savedDoc = this.documentRepo.save(document); // saving document again, this time with user
 
-
-        DocumentDTO doc = new DocumentDTO();
-        doc.setAuthorId(document.getUser().getUserId());
-        doc.setTitle(document.getTitle());
-        doc.setBody(document.getBody());
-        doc.setCreationDate(document.getCreationDate());
-        doc.setModificationDate(document.getModificationDate());
-        doc.setAuthor(document.getUser().getName());
-
-        return doc;
+        return new DocumentDTO(savedDoc);
     }
 
     /**
@@ -71,8 +62,20 @@ public class DocumentService {
      * @param document document to be updated
      * @return DTO of the updated document
      */
-    public DocumentDTO updateDocument(Document document){
-        return new DocumentDTO(this.documentRepo.save(document));
+    public DocumentDTO updateDocument(DocumentDTO document){
+        // get document by id
+        Document doc = this.documentRepo.findById(document.getId()).get();
+
+        // update doc's values with document's
+        doc.setTitle(document.getTitle());
+        doc.setBody(document.getBody());
+        doc.setModificationDate(new Date());
+
+        // save the document with updated values
+        this.documentRepo.save(doc);
+
+        // return updated doc as a response
+        return new DocumentDTO(doc);
     }
 
     /**
@@ -80,7 +83,7 @@ public class DocumentService {
      * @return all documents within the db as a list
      */
     public List<DocumentDTO> getAllDocuments(){
-
+        // gets all the Documents from the db, then uses stream to make them into dto & put them into a list
         return this.documentRepo.findAllByOrderByModificationDateDesc().stream().map(DocumentDTO::new).collect(Collectors.toList());
     }
 
