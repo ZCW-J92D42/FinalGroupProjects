@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // Import the styles
+import Cookies from 'js-cookie';
 
 const TextEditor = (id) => {
     // read article to maybe parse string from quill
@@ -9,6 +10,7 @@ const TextEditor = (id) => {
     const [document, setDocument] = useState('');
     let userId = localStorage.getItem('userId');
     const [canEdit, setCanEdit] = useState(false);
+    let title; 
 
     // fetching document from backend
     useEffect(() => {
@@ -21,6 +23,8 @@ const TextEditor = (id) => {
             setContent(data.body);
             setDocument(data);
             setCanEdit(userId == data.authorId);
+            title = document.title;
+
         });
     }, []); // REMEMBER THIS ENDING PART, OR ELSE IT'LL FETCH FOREVER
 
@@ -34,8 +38,25 @@ const TextEditor = (id) => {
     // https://jasonwatmore.com/post/2020/02/01/react-fetch-http-post-request-examples
     const handleSave = (delta) => {
         // Your save logic here
-        console.log(delta)
-        
+        console.log(content)
+        const token = `Bearer ` + Cookies.get('token');
+        const requestJSON = {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: token,
+            },
+            body: JSON.stringify({ id: document.id, title: document.title, body: content, authorId: document.authorId })
+        }
+        console.log(requestJSON);
+        console.log(document);
+        fetch('http://localhost:8080/document/update', requestJSON).then((res) => {
+            console.log(res);
+        }).then((data) => {
+            setDocument(data);
+        }).catch((e) => {
+            console.log(e);
+        })
         
     };
 
