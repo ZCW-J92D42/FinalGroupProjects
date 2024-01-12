@@ -5,6 +5,8 @@ import Library from "../components/Library";
 
 
 function MainPage() {
+    const path = `getAll`;
+
     return (
         <>
         <Outlet/>
@@ -13,7 +15,7 @@ function MainPage() {
                 Welcome to Zip Docs
 
 
-                    <Library/>
+                    <Library urlPath={path}/>
 
 
             </header>

@@ -62,12 +62,12 @@ function Document({ ...docDetails }) {
 // TBD: pass in some string so that it can be used for the path -- will make this reusable between
 //      search and main page
 // resources: https://www.freecodecamp.org/news/how-to-fetch-api-data-in-react/
-const Library = () => {
+const Library = ({urlPath}) => {
     const [documents, setDocuments] = useState([]);
 
     useEffect(() => {
         // fetch request to our backend to get documents
-        fetch('http://localhost:8080/document/getAll', {
+        fetch('http://localhost:8080/document/' + urlPath, {
             method: 'GET',
         }).then((res) => {
             return res.json(); // returning the response as a json... idk what this does
