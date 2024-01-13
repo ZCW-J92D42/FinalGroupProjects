@@ -16,7 +16,11 @@ public class Document {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id; // unique id for the document
     String title; // name/title of the document
+    @Lob // specifies that this will be a Large Object
+    @Column(length=394048542) // for some reason it was tinytext in the sql db, so specifying a really long length to get it to be a long text
     String body; // the text within the document
+
+//    private byte[] body;
     Date creationDate; // date that document is created
     Date modificationDate; // date that document is modified
 
