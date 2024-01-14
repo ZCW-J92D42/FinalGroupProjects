@@ -70,7 +70,7 @@ public class SecurityConfig {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         //Make the below setting as * to allow connection from any hos
         corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000")); // allow requests from localhost:3000
-        corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT")); // allow these types  of requests
+        corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE")); // allow these types  of requests
         corsConfiguration.setAllowCredentials(true);
         corsConfiguration.setAllowedHeaders(List.of("*"));
         corsConfiguration.setMaxAge(3600L);
