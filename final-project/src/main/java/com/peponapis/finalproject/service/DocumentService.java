@@ -111,6 +111,10 @@ public class DocumentService {
         return this.documentRepo.searchDocuments(filter).stream().map(DocumentDTO:: new).collect(Collectors.toList());
     }
 
+    /**
+     *
+     * @param id Id of document to be deleted
+     */
     public void deleteDocument(int id) {
         // get the document to be deleted from the db
         Document docToDelete = this.documentRepo.findById(id).get();

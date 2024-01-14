@@ -73,6 +73,10 @@ public class DocumentController {
         return this.documentService.searchDocuments(filter);
     }
 
+    /**
+     *
+     * @param id Id of document to be deleted
+     */
     @DeleteMapping("/delete/{id}")
     public void deleteDocument(@PathVariable("id") int id){
          this.documentService.deleteDocument(id);
