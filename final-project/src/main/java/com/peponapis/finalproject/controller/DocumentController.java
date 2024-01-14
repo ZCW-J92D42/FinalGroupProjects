@@ -73,6 +73,10 @@ public class DocumentController {
         return this.documentService.searchDocuments(filter);
     }
 
+    @DeleteMapping("/delete/{id}")
+    public void deleteDocument(@PathVariable("id") int id){
+         this.documentService.deleteDocument(id);
+    }
 //    taking this out... DocRepo for explanation
 //    @GetMapping("/allByUser")
 //    public List<Document> getAllDocumentsByUserId(@RequestParam(value = "userId") int userId){

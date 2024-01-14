@@ -111,6 +111,19 @@ public class DocumentService {
         return this.documentRepo.searchDocuments(filter).stream().map(DocumentDTO:: new).collect(Collectors.toList());
     }
 
+    public void deleteDocument(int id) {
+        // get the document to be deleted from the db
+        Document docToDelete = this.documentRepo.findById(id).get();
+        // find the user that created it
+        UserEntity author = docToDelete.getUser();
+        // delete the document from the user's list of created docs
+        // note: we do this first because doc has a foreign key to user...
+        // have to get rid of the relationship between them first before deleting doc itself
+        author.deleteDocument(docToDelete);
+        // delete the doc from the db
+        this.documentRepo.deleteById(id);
+    }
+
     // Taking this out... DocRepo for explanation
 //    public List<Document> getAllDocumentsByUser(int userId){
 //        return this.documentRepo.getAllDocumentsByUserId(userId);
