@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import CreateDocumentIcon from "../components/CreateDocumentIcon";
 import Doc from "../components/Doc";
 import Library from "../components/Library";
+import SearchBar from "../components/Searchbar";
 
 
 function SearchPage() { 
@@ -9,11 +10,16 @@ function SearchPage() {
     // const { search } = useParams(); // Pulling the data out of the URL
     // const results = JSON.parse(decodeURI(search));
     // console.log(search, results); // Fixed variable name
-    console.log(filter)
-  
+  console.log(filter);
     return (
       <div className="App">
-        <h1>Search Result</h1>
+        <br/>
+        <br/>
+        <SearchBar value={filter.search} placeholder="Enter a Keyword"/>
+        <br/>
+        <br/>
+        <br/>
+        <h1>Search Results for: '{filter.search}'</h1>
   
         {/* {results && results.length > 0 ? (
           // Use parentheses to wrap the map function

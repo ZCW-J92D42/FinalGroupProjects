@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import {useState} from "react";
 import Cookies from 'js-cookie';
 
-const CreateDocumentIcon = () => {
+const CreateDocumentIcon = ({page}) => {
 
     const [isFormOpen, setFormOpen] = useState(false);
     const [title, setDocumentTitle] = useState('');
@@ -73,50 +73,52 @@ const CreateDocumentIcon = () => {
         closeForm();
     };
 
+    if(localStorage.getItem('userId') != null && page === "Main"){
+        console.log("in if")
+        return (
+            <div>
+                {isLoggedIn() ? (
+                    <img className="image"
+                        src={add}
+                        alt="Create Document"
+                        onClick={handleClick}
+                        style={{cursor:'pointer'}}
+                    />
 
+                    ) : (
 
-    return (
-        <div>
-            {isLoggedIn() ? (
-                <img className="image"
-                    src={add}
-                    alt="Create Document"
-                    onClick={handleClick}
-                    style={{cursor:'pointer'}}
-                />
+                            <img
+                                src={add}
+                                alt="Create Document"
+                                className="image"
+                            />
 
-                ) : (
+                    )}
 
-                        <img
-                            src={add}
-                            alt="Create Document"
-                            className="image"
-                        />
+                {isFormOpen && (
+                    <div className="form-popup" id="myForm">
+                        <form onSubmit={handleSubmit} className="form-container">
+                            <h1>Create Document</h1>
 
+                            <input
+                                type="text"
+                                placeholder="Enter Document Title"
+                                name="docTitle"
+                                value={title}
+                                onChange={(e) => setDocumentTitle(e.target.value)}
+                            />
+                            <p>
+
+                            <button type="submit" className="btn">Create</button>
+                            <button type="button" className="btncancel" onClick={closeForm}>Close</button>
+                            </p>
+                        </form>
+                    </div>
                 )}
+            </div>
 
-            {isFormOpen && (
-                <div className="form-popup" id="myForm">
-                    <form onSubmit={handleSubmit} className="form-container">
-                        <h1>Create Document</h1>
-
-                        <input
-                            type="text"
-                            placeholder="Enter Document Title"
-                            name="docTitle"
-                            value={title}
-                            onChange={(e) => setDocumentTitle(e.target.value)}
-                        />
-                        <p>
-
-                        <button type="submit" className="btn">Create</button>
-                        <button type="button" className="btncancel" onClick={closeForm}>Close</button>
-                        </p>
-                    </form>
-                </div>
-            )}
-        </div>
-    );
+        );
+     }
 };
 
 export default CreateDocumentIcon;

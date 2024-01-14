@@ -6,6 +6,7 @@ import SearchBar from "../components/Searchbar";
 
 function MainPage() {
     const path = `getAll`;
+    const page = "Main";
 
     return (
         <>
@@ -15,12 +16,10 @@ function MainPage() {
                 
                 
                 <h2>Welcome to Zip Docs</h2>
-
-                
-                      <SearchBar placeholder="Enter a Keyword"/>
                        
+                <SearchBar placeholder="Enter a Keyword"/>
 
-                    <Library urlPath={path}/>
+                <Library urlPath={path} page={page}/>
 
 
             </header>

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './Library.css';
 import { useNavigate } from 'react-router-dom';
 import CreateDocumentIcon from "./CreateDocumentIcon";
+import SearchBar from './Searchbar';
 
 function Document({ ...docDetails }) {
     // formatting date from api to Day Month, Year (i.e. 4 January, 2024)
@@ -61,8 +62,9 @@ function Document({ ...docDetails }) {
 
 // resources: https://www.freecodecamp.org/news/how-to-fetch-api-data-in-react/
 // {param} makes it so that we set props.param the value that we pass in
-const Library = ({urlPath}) => {
+const Library = ({urlPath, page}) => {
     const [documents, setDocuments] = useState([]);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
         // fetch request to our backend to get documents
@@ -76,6 +78,7 @@ const Library = ({urlPath}) => {
         });
     }, []);
 
+
     return (
         <>
         {/* library comment was here */}
@@ -83,7 +86,7 @@ const Library = ({urlPath}) => {
 
         <div className='Library'>
             {/* put create here */}
-            <CreateDocumentIcon/>
+            <CreateDocumentIcon page={page}/>
             {documents.map((doc) => { // for every doc in documents,
                 return <><Document {...doc} /></> // make a document component & pass in doc's data to it
             })}
