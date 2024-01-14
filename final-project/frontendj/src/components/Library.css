@@ -101,3 +101,21 @@
     fill: #ced8de;
   }
   
+  .trashcan {
+    width: 20px;
+    height: 20px;
+    
+    .trashcan-open {
+      display: none;
+    }
+    
+    &:hover {
+      .trashcan-open {
+        display: inline;
+      }
+      .trashcan-closed {
+        display: none;
+      }
+    }
+    
+  }
