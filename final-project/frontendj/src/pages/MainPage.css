@@ -1,0 +1,11 @@
+#welcome {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 70px; 
+    padding-top:30px;
+    font-weight:500;
+
+}
+
+#library {
+    background-color: #d9d9d9;
+}

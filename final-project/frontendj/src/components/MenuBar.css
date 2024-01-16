@@ -1,0 +1,29 @@
+/* styles.css */
+
+.menu-bar {
+    display: flex;
+    justify-content: space-between;
+    background: linear-gradient(to right, #8ca5d9, #c6a1dc);
+    padding: 20px;
+    text-align: center;
+    color: white;
+}
+
+.menu-items {
+    display: flex;
+}
+
+.menu-items {
+    display: flex;
+    margin: auto; /* Center the menu items horizontally */
+
+}
+
+.user-menu {
+    display: flex;
+    margin: auto; /* Center the user menu items horizontally */
+}
+/* Additional styling for user-related menu items */
+.user-menu .menu-item {
+    margin-right: 10px;
+}

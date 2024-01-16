@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=YourCustomFont&display=swap');
+
+.editor{
+   position: absolute;
+
+}
+
+.editor-main{
+    background: #d9d9d9;
+}
+
+#save-btn:hover {
+    cursor:pointer;
+    letter-spacing: 0.2rem;
+    padding: 1.1rem 3.1rem;
+    background: var;
+    color: black;
+    /* box-shadow: 0 0 35px var(--clr); */
+    animation: box 3s infinite;
+
+}
+
+#save-btn{
+
+    position: relative;
+    background: #797070;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: none;
+    letter-spacing: 0.1rem;
+    font-size: 1rem;
+    padding: 1rem 3rem;
+    transition: 0.2s;
+}
+
+@keyframes box {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 35px
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 35px
+    }
+}
+
+.ql-editor  {
+    font-size: 22px;
+}
+
+.ql-picker.ql-size .ql-picker-item[data-value=false] {
+    font-weight: 200 !important;
+
+}
+
+.ql-editor strong{
+    font-weight: 800;
+}
+
+/* This is to make toolbar buttons bigger */
+.ql-toolbar {
+    margin-top: 20px;
+    margin-left: 380px;
+    margin-bottom: 20px;
+    width: 720px;
+    transform: scale(2,2); 
+}
+
+/* These next 3 are to have the menu options above the editor */
+.ql-options-picker{
+    position: relative;
+    z-index: 1;
+}
+
+.ql-container.ql-snow{
+    position: relative;
+    z-index: -1;
+}
+
+#editor.quill {
+    position: relative;
+    z-index: -1;
+}

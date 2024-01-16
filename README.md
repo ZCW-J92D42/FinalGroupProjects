@@ -1,139 +1,26 @@
-# Final Group Projects (Java) - Server
+# Zip Docs 📝
 
-* **Objective** - to create an implementation of a small web service
-* **Purpose** - to demonstrate the construction of a full-stacked web-application
+## Team: Tam Maria Doan <a href="https://www.linkedin.com/in/tammariadoan/"><img src="https://github.com/tandpfun/skill-icons/raw/main/icons/LinkedIn.svg" width="20px"/></a> &nbsp;&nbsp;Christianne Edgard <a href="https://www.linkedin.com/in/christianne-edgard/"><img src="https://github.com/tandpfun/skill-icons/raw/main/icons/LinkedIn.svg" width="20px"/></a> &nbsp;&nbsp;Hyunji Lee <a href="https://www.linkedin.com/in/hyunjialee/"><img src="https://github.com/tandpfun/skill-icons/raw/main/icons/LinkedIn.svg" width="20px"/></a>
 
-## Developmental Notes
-### Minimum Tech Stack
-* **Wireframe** - Mockflow
-* **Frontend** - Angular / React / VanillaJS
-* **Business Logic** - Java / REST / JPA
-* **Data Layer** - MySQL / Postgres
-* **Cloud** - Heroku/AWS/Google or `zipcode.rocks` hosting
+### About
 
-### Installation
+Zip Docs is a user-friendly, web-based document editing platform inspired by Google Docs, enabling document creation, editing and seamless sharing with users whether they're logged in or not. Store all your documents in one easy-to-reach library! 
 
-Use Spring Initializr (or JHipster) to create an starting point for your application
+### Tech Stack
 
+<a href="https://www.java.com/en/"><img src = "https://raw.githubusercontent.com/github/explore/5b3600551e122a3277c2c5368af2ad5725ffa9a1/topics/java/java.png" width="50px" /></a> <a href="https://spring.io/"><img src = "https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/spring-boot/spring-boot.png" width="50px" alt="Spring boot"/></a> <a href="https://react.dev"><img src="https://github.com/tandpfun/skill-icons/raw/main/icons/React-Light.svg " width="50px"/></a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img src="https://github.com/tandpfun/skill-icons/raw/main/icons/JavaScript.svg" width="50px"></img></a> <a href=""><img src="https://github.com/tandpfun/skill-icons/raw/main/icons/MySQL-Light.svg" width="50px"/>
 
-## Project Topics
+## Features
 
-### Document Editor and Library (google doc clone)
+- [x] User registration and login
+- [x] Ability to view library of documents
+- [x] Creating documents
+- [x] Editing documents
+- [x] Exporting documents
+- [x] Searching the document library
+- [ ] Deleting documents
+- [ ] Options to change in what order the documents are displayed
 
-#### User Stories to Fulfill
-* As a user, (not logged in) I
-    * can view list of all documents
-    * can view a specific document 
-* As a user, (logged in) I
-    * can create new documents
-        * A document can consist of images and text
-	* can view list of all documents
-	* uses a well-known JS text editor (like Monaco?)
-    * can view documents filtered by a search term
-    * can download/upload docs to/from "desktop"
+## Demo of Features
 
-<hr>
-
-
-### Video Library Application (netflix clone)
-
-#### User Stories to Fulfill  
-* As a user, (not logged in) I
-    * can view list of all videos
-* As a user, (logged in) I
-    * can upload new videos
-    * can view list of all videos
-    * can post simple text-comments on a video
-
-
-<hr>
-
-### Work Communication (slack clone)
-
-#### User Stories
-* As a client (not logged in) I can register as a new user
-* As a user, I
-  * can create a new workspace
-  * can view default channels
-  * can view accessible channels
-  * can direct message other users
-  * can view messages live as they are received
-* As an admin, I am a user who can
-  * create new channels
-  * remove users from channels
-
-<hr>
-
-### News Site (NPR/CNN/NYTimes clone)
-
-#### User Stories
-* As a client (not logged in) I can see news headlines
- * and # of likes about news stories
-* As a user, (logged in) I
-  * search for news of interest
-  * create bookmarks for myself
-  * add a like to a news story
-  * create comments on news stories
-   that other logged in users can see.
-    
-<hr> 
-
-### Money Management Application (like mint)
-
-#### User Stories to Fulfill  
-* As a user, (not logged in) I
-	* can create new accounts
-* As a user, (logged in) I
-	* deposit money to each account
-	* withdraw money from each account
-	* transfer money to and from any 2 accounts
-
-<hr> 
-
-### Blog Application (blogger clone)
-
-#### User Stories to Fulfill
-* As a user, (not logged in) I
-    * can view list of all blog posts
-    * can view blog posts filtered by blog-tag
-* As a user, (logged in) I
-    * can create new blog posts
-        * A blog post can consist of images and text
-	* can view list of all blog posts
-    * can view blog posts filtered by blog-tag
-	* can view new blog posts upon refreshing the DOM
-
-<hr>
-
-### Twitter Application (twitter clone)
-
-#### User Stories to Fulfill  
-* As a user, (not logged in) I
-    * can view list of all tweets from all users
-* As a user, (logged in) I
-    * can post a new tweet (limited to 255 chars)
-    * can view list of all tweets
-    * can see tweets by a specific user
-    * can use "@" notation to direct a tweet to another user
-    * can add images to tweets
-    * all new tweets appear in timeline as they come in
-    * can search by "#" hashtags
-
-
-<hr>
-
-### TCP Application
-
-#### User Stories to Fulfill  
-* As a user, (logged in) I
-    * can send messages to a _peer_.
-	* can view default channels
-	* can view all accessible channels
-	* can view messages live as they are received
-
-<hr>
-
-
-### Hosting
-
-see [https://github.com/ZipCodeCore/FinalProjects-Hosting](https://github.com/ZipCodeCore/FinalProjects-Hosting)
+TBA after UI is finalized
